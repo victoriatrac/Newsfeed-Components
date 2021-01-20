@@ -1,6 +1,8 @@
 // This is the data we will be using to create our articles. Look at it, then proceed to line 93.
+
 // OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.
 // You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
+
 const data = [
   {
     title: 'Lambda School Students: "We\'re the best!"',
@@ -86,8 +88,17 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'I love Futurama',
+    date: 'January 19, 2021',
+    firstParagraph: 'And so we say goodbye to our beloved pet, Nibbler, who\'s gone to a place where I, too, hope one day to go. The toilet. I found what I need. And it\'s not friends, it\'s things. We can\'t compete with Mom! Her company is big and evil! Ours is small and neutral! I don\'t know what you did, Fry, but once again, you screwed up! Now all the planets are gonna start cracking wise about our mamas. I can explain. It\'s very valuable. Can we have Bender Burgers again? This opera\'s as lousy as it is brilliant! Your lyrics lack subtlety. You can\'t just have your characters announce how they feel. That makes me feel angry!',
+    secondParagraph: 'A sexy mistake. Hey, whatcha watching? Humans dating robots is sick. You people wonder why I\'m still single? It\'s \'cause all the fine robot sisters are dating humans! Throw her in the brig. Kids don\'t turn rotten just from watching TV.',
+    thirdParagraph: 'Man, I\'m sore all over. I feel like I just went ten rounds with mighty Thor. Bender, being God isn\'t easy. If you do too much, people get dependent on you, and if you do nothing, they lose hope. You have to use a light touch. Like a safecracker, or a pickpocket.'
   }
 ];
+
+// import * as datawww from '/components/Data.js';
 
 /*
   Step 1: Write a component called 'articleMaker' to create an article.
@@ -114,3 +125,50 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+function articleMaker(arr) {
+  const articlesDiv = document.querySelector('.articles');
+
+  arr.forEach(item => {
+
+    const articleDiv = document.createElement('div');
+    articleDiv.className = 'article';
+
+    const articleTitle = document.createElement('h2');
+    articleTitle.textContent = item.title;
+
+    const articleDate = document.createElement('p');
+    articleDate.className = 'date';
+    articleDate.textContent = item.date;
+
+    const firstP = document.createElement('p');
+    firstP.textContent = item.firstParagraph;
+    
+    const secondP = document.createElement('p');
+    secondP.textContent = item.secondParagraph;
+    
+    const thirdP = document.createElement('p');
+    thirdP.textContent = item.thirdParagraph;
+
+    const expandBtn = document.createElement('span');
+    expandBtn.className = 'expandButton';
+    expandBtn.innerHTML = '+';
+    expandBtn.addEventListener('click', function(){
+      articleDiv.classList.toggle('article-open');
+      console.log('poop');
+    });
+
+    articleDiv.appendChild(articleTitle);
+    articleDiv.appendChild(articleDate);
+    articleDiv.appendChild(firstP);
+    articleDiv.appendChild(secondP);
+    articleDiv.appendChild(thirdP);
+    articleDiv.appendChild(expandBtn);
+
+    articlesDiv.appendChild(articleDiv);
+  })
+
+  return articlesDiv;
+}
+
+articleMaker(data);
